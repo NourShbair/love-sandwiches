@@ -3,6 +3,7 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 import gspread
 from google.oauth2.service_account import Credentials
+from pprint import pprint
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -24,7 +25,6 @@ def get_sales_data():
         print("Example: 10,20,30,40,50,60\n")
         data_str = input("Enter your data here:")
         sales_data = data_str.split(",")
-        validate_data(sales_data)
         if validate_data(sales_data):
             print("Data is valid!")
             break
@@ -56,6 +56,21 @@ def update_sales_worksheet(data):
     sales_woerksheet.append_row(data)
     print("Sales worksheet updated successfully.\n")
 
-data = get_sales_data()
-sales_data = [int(num) for num in data]
-update_sales_worksheet(sales_data)
+def caluculate_surplus_data(data):
+    print("Calculating surplus data...\n")
+    stock = SHEET.worksheet("stock").get_all_values()
+    stock_row = stock[-1]
+    print(stock_row)
+
+def main():
+    """
+    run all program function
+    """
+
+    data = get_sales_data()
+    sales_data = [int(num) for num in data]
+    update_sales_worksheet(sales_data)
+    caluculate_surplus_data(sales_data)
+
+print("Welcone to Love Sandwitch Data Automation")
+main()
