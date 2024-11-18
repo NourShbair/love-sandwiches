@@ -66,6 +66,12 @@ def caluculate_surplus_data(sales_row):
         surplus_data.append(surplus)
     return surplus_data
         
+def update_surplus_worksheet(data):
+    print("updating surplus woorksheet...\n")
+    surplus_woerksheet = SHEET.worksheet("surplus")
+    surplus_woerksheet.append_row(data)
+    print("Surplus worksheet updated successfully.\n")
+
 def main():
     """/
     run all program function
@@ -74,6 +80,8 @@ def main():
     sales_data = [int(num) for num in data]
     update_sales_worksheet(sales_data)
     new_surplus_data = caluculate_surplus_data(sales_data)
+    update_surplus_worksheet(new_surplus_data)
+
 
 print("Welcone to Love Sandwitch Data Automation")
 main()
