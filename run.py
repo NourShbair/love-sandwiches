@@ -3,7 +3,7 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 import gspread
 from google.oauth2.service_account import Credentials
-from pprint import pprint
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -23,7 +23,7 @@ def get_sales_data():
         print("Please enter sales data from the last market.")
         print("Data should be six numbers, seperated by commas.")
         print("Example: 10,20,30,40,50,60\n")
-        data_str = input("Enter your data here:")
+        data_str = input("Enter your data here:\n")
         sales_data = data_str.split(",")
         if validate_data(sales_data):
             print("Data is valid!")
@@ -56,7 +56,7 @@ def update_worksheet(data,worksheet):
     Update the relevant worksheet with the data provided
     """
     worksheet_to_update = SHEET.worksheet(worksheet)
-    worksheet_to_update.append(data)
+    worksheet_to_update.append_row(data)
     print(f"{worksheet} worksheet updated successfully\n")
 
 def caluculate_surplus_data(sales_row):
